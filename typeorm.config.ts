@@ -1,0 +1,14 @@
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import * as dotenv from 'dotenv';
+import { join } from 'path';
+dotenv.config();
+
+export const typeOrmConfig: TypeOrmModuleOptions = {
+  type: 'postgres',
+  url: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  entities: [join(__dirname, '../**/*.entity.{ts,js}')],
+  migrations: [join(__dirname, '../migrations/*.{ts,js}')],
+  synchronize: false,
+  autoLoadEntities: true,
+};
